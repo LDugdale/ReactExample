@@ -1,0 +1,88 @@
+.footer {
+  position: relative;
+  background-color: var(--white);
+  border-top: 1px solid var(--line-separator-color);
+}
+
+.tabs {
+  width: 100%;
+  position: absolute;
+  bottom: 0px;
+  left: 0px;
+  height: 100%;
+}
+
+.tabs .tab {
+  display: inline-block;
+  cursor: pointer;
+  width: calc(100% / 3);
+  text-align: center;
+  position: relative;
+  height: 100%;
+}
+
+.tabs .tab:hover, .tabs .tab-active {
+  color: white;
+}
+
+.tabs .underline {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  border-bottom: 3px solid var(--primary-color);
+}
+
+.tabs .tab .item {
+  position: absolute;
+  width: 100%;
+  bottom: 0px;
+}
+
+.footer .tabs .tab-active .plants .item-background {
+  width: 45px;
+  height: 45px;
+}
+
+.tabs .tab .plants .item-background {
+  border: 1px solid var(--line-separator-color);
+  border-radius: 100% 100% 0% 100%;
+  padding: 15px 15px 6px 15px;
+  width: 30px;
+  height: 30px;
+  position: absolute;
+  bottom: 2px;
+  margin: 0 auto;
+  left: 50%; 
+  border-radius: 100%;
+  transform: translateX(-50%);
+  transition: all 0.3s;
+  z-index: -1;
+  background-color: var(--white);
+}
+
+.tabs .tab .item .icon  {
+  text-align: center;
+  padding: 5px;
+}
+
+.tabs .tab .plants .icon .icon-wrapper {
+  display: inline-block;
+  padding: 15px 15px 0px 15px;
+  border-radius: 100% 100% 0% 100%;
+  background-color: var(--white);
+}
+
+.tabs .tab .plants .icon .icon-wrapper svg {
+  height: 30px;
+}
+
+.tabs .tab .item .icon svg {
+  height: 25px;
+  transition: all 0.3s;
+}
+
+.tabs .tab-active .plants .icon .icon-wrapper svg {
+  height: 45px;
+}
+

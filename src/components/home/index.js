@@ -1,7 +1,7 @@
 import React from 'react';
-import HomeComponent from './HomeComponent';
+import HomeContainer from './homeContainer';
 
-const HomePage = () =>
-    <HomeComponent />
+const HomePage = (props) =>
+    <HomeContainer />
 
 export default HomePage;

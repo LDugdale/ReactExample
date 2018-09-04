@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import PasswordForgetForm from './passwordForgetForm';
-import { auth } from '../../../firebase';
+import { SignInLink } from '../signIn';
+import { passwordReset } from '../../../services/userService';
+import { Spinner, spinnerController } from '../../spinner';
 
 const updateByPropertyName = (propertyName, value) => () => ({
     [propertyName]: value,
@@ -23,13 +25,15 @@ export default class PasswordForgetContainer extends Component {
 
     handleSubmit(event){
         const { email } = this.state; 
-
-        auth.doPasswordReset(email)
+        spinnerController.show();
+        passwordReset(email)
         .then(() => {
             this.setState(() => ({ ...INITIAL_STATE }));
+            spinnerController.hide();
         })
         .catch(error => {
             this.setState(updateByPropertyName('error', error));
+            spinnerController.hide();
         });
  
         event.preventDefault();      
@@ -41,12 +45,14 @@ export default class PasswordForgetContainer extends Component {
 
     render(){
         return(
-            <div>
-                <h1>PasswordForget</h1>
+            <div className="auth-content password-forget">
+                <Spinner/>
                 <PasswordForgetForm 
                     onSubmit={this.handleSubmit}
                     onChange={this.handleChange}
                 />
+                <p className="auth-separator"><span>OR</span></p>
+                <SignInLink />
             </div>
         );
     }

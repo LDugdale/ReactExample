@@ -1,0 +1,26 @@
+.input-wrapper {
+    margin:20px 0;
+    position:relative;
+    display:inline-block;
+}
+
+.input-wrapper span {
+    padding:10px;
+    pointer-events: none;
+    position:absolute;
+    left:0;
+    top:0;
+    transition: 0.2s;
+    transition-timing-function: ease;
+    transition-timing-function: cubic-bezier(0.25, 0.1, 0.25, 1);
+    opacity:0.5;
+}
+
+.input-wrapper input {
+    padding:10px;
+}
+
+.input-wrapper input:focus + span, .input-wrapper input:not(:placeholder-shown) + span {
+    opacity:1;
+    transform: scale(0.75) translateY(-100%) translateX(-20px);
+}

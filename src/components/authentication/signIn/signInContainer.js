@@ -3,8 +3,9 @@ import { withRouter } from 'react-router-dom';
 import SignInForm from './signInForm';
 import { SignUpLink } from '../signUp';
 import { PasswordForgetLink } from '../passwordForget';
-import { auth } from '../../../firebase';
 import * as routes from '../../../constants/routes';
+import { signIn } from '../../../services/userService';
+import { Spinner, spinnerController } from '../../spinner';
 
 const updateByPropertyName = (propertyName, value) => () => ({
   [propertyName]: value,
@@ -31,18 +32,17 @@ class SignInContainer extends Component {
       email,
       password,
     } = this.state;
-
-    const {
-      history,
-    } = this.props;
-
-    auth.doSignInWithEmailAndPassword(email, password)
+    spinnerController.show();
+    signIn(email, password)
       .then(() => {
+        debugger;
+        spinnerController.hide();
         this.setState(() => ({ ...INITIAL_STATE }));
-        history.push(routes.HOME);
+        this.props.history.push(routes.HOME);
       })
       .catch(error => {
         this.setState(updateByPropertyName('error', error));
+        spinnerController.hide();
       });
 
     event.preventDefault();
@@ -58,8 +58,8 @@ class SignInContainer extends Component {
 
   render(){
     return (
-      <div className="container sign-in">
-        <h1>SignIn</h1>
+      <div className="auth-content sign-in">
+        <Spinner />
         <SignInForm 
           values={this.state}
           isInvalid={this.isInvalid}
@@ -67,6 +67,7 @@ class SignInContainer extends Component {
           onChange={this.handleChange}
         />
         <PasswordForgetLink />
+        <p className="auth-separator"><span>OR</span></p>
         <SignUpLink />
       </div>
     );

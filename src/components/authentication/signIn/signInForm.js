@@ -1,4 +1,5 @@
 import React from 'react';
+import Input from '../../controls/input'
 
 const SignInForm = (props) => {
 
@@ -9,21 +10,23 @@ const SignInForm = (props) => {
     } = props.values;
     
     return (
-        <form onSubmit={this.onSubmit}>
-            <input
-                value={email}s
-                onChange={event => props.onChange("email", event.target.value)}
+        <form onSubmit={props.onSubmit}>
+            <Input
+                value={email}
+                onChange={props.onChange}
+                valueKey="email"
                 type="text"
-                placeholder="Email Address"
+                placeholder="Email"
             />
-            <input
+            <Input
                 value={password}
-                onChange={event => props.onChange("password", event.target.value)}
+                onChange={props.onChange}
+                valueKey="password"
                 type="password"
                 placeholder="Password"
             />
             <button disabled={props.isInvalid()} type="submit">
-                Sign In
+                LOG IN
             </button>
 
             { error && <p>{error.message}</p> }

@@ -1,4 +1,5 @@
 import React from 'react';
+import Input from '../../controls/input';
 
 const SignUpForm = (props) =>{
 
@@ -12,30 +13,34 @@ const SignUpForm = (props) =>{
   
       return (
         <form onSubmit={event => props.onSubmit(event)}>
-          <input
-            value={username}
-            onChange={event => props.onChange("username", event.target.value)}
-            type="text"
-            placeholder="Full Name"
-          />
-          <input
-            value={email}
-            onChange={event => props.onChange("email", event.target.value)}
-            type="text"
-            placeholder="Email Address"
-          />
-          <input
-            value={passwordOne}
-            onChange={event => props.onChange("passwordOne", event.target.value)}
-            type="password"
-            placeholder="Password"
-          />
-          <input
-            value={passwordTwo}
-            onChange={event => props.onChange("passwordTwo", event.target.value)}
-            type="password"
-            placeholder="Confirm Password"
-          />
+          <Input
+                value={username}
+                onChange={props.onChange}
+                valueKey="username"
+                type="text"
+                placeholder="Username"
+            />
+          <Input
+                value={email}
+                onChange={props.onChange}
+                valueKey="email"
+                type="text"
+                placeholder="Email"
+            />
+          <Input
+                value={passwordOne}
+                onChange={props.onChange}
+                valueKey="passwordOne"
+                type="password"
+                placeholder="Password"
+            />
+          <Input
+                value={passwordTwo}
+                onChange={props.onChange}
+                valueKey="passwordTwo"
+                type="password"
+                placeholder="Confirm Password"
+            />
           <button disabled={props.isInvalid()} type="submit">
             Sign Up
           </button>

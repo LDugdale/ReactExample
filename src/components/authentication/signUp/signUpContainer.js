@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
+import { createUser } from '../../../services/userService';
 import SignUpForm from './signUpForm';
-import { auth, db } from '../../../firebase';
 import * as routes from '../../../constants/routes';
+import { SignInLink } from '../signIn'
+import { Spinner, spinnerController } from '../../spinner';
 
 const updateByPropertyName = (propertyName, value) => () => ({
   [propertyName]: value,
@@ -32,25 +34,17 @@ class SignUpContainer extends Component {
             email,
             passwordOne,
         } = this.state;
-
-        auth.doCreateUserWithEmailAndPassword(email, passwordOne)
-        .then(authUser => {
-
-        // Create a user in your own accessible Firebase Database too
-        db.doCreateUser(authUser.user.uid, username, email)
-            .then(() => {
-                this.setState(() => ({ ...INITIAL_STATE }));
-                this.history.push(routes.HOME);
-            })
-            .catch(error => {
-                this.setState(updateByPropertyName('error', error));
-            });
-
+        spinnerController.show();
+        createUser(username, email, passwordOne)
+        .then(() => {
+          this.setState(() => ({ ...INITIAL_STATE }));
+          this.props.history.push(routes.HOME);
+          spinnerController.hide();
         })
         .catch(error => {
-        this.setState(updateByPropertyName('error', error));
+          this.setState(updateByPropertyName('error', error));
+          spinnerController.hide();
         });
-
         event.preventDefault();
     }
 
@@ -64,14 +58,16 @@ class SignUpContainer extends Component {
 
   render(){
       return(
-        <div>
-            <h1>SignUp</h1>
-            <SignUpForm 
-                values={this.state}
-                isInvalid={this.isInvalid}
-                onSubmit={this.handleSubmit}
-                onChange={this.handleChange}
-            />
+        <div className="auth-content sign-up">
+          <Spinner />
+          <SignUpForm 
+              values={this.state}
+              isInvalid={this.isInvalid}
+              onSubmit={this.handleSubmit}
+              onChange={this.handleChange}
+          />
+          <p className="auth-separator"><span>OR</span></p>
+          <SignInLink />
         </div>        
       );
   }
