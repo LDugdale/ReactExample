@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Tabs from './tabs';
 import Tab from './tab';
+import Menu from './menu';
 import '../../styles/footer.css';
 
 const transitionTime = 200;
@@ -12,11 +13,14 @@ export default class FooterContainer extends Component {
     super(props);
     this.state = {
       sizes: {},
+      showMenu: false
     };
     this.els = {};
     this.setElement = this.setElement.bind(this);
     this.getUnderlineStyle = this.getUnderlineStyle.bind(this);
     this.createTabs = this.createTabs.bind(this);
+    this.handleClick = this.handleClick.bind(this);
+    this.toggleMenu =this.toggleMenu.bind(this);
   }
 
   componentDidMount() {
@@ -66,6 +70,22 @@ export default class FooterContainer extends Component {
     this.els[key] = el
   }
 
+  handleClick(pageKey){
+    if(this.props.active === 'plants' && pageKey === 'plants'){
+      this.toggleMenu();
+    }
+
+    this.props.onChange(pageKey);
+  }
+
+  toggleMenu(){
+    if(this.state.showMenu){
+      this.setState({showMenu: false});
+    } else {
+      this.setState({showMenu: true});
+    }
+  }
+
   createTabs(){
     return this.props.pages.map((page, i) =>{
       let className = `tab`;
@@ -76,7 +96,7 @@ export default class FooterContainer extends Component {
         <Tab
           page={page}
           pageClass={className}
-          onClick={this.props.onChange}
+          onClick={this.handleClick}
           setElement={this.setElement}
         />
       );
@@ -89,10 +109,16 @@ export default class FooterContainer extends Component {
             className="footer"
             ref={el => this.root = el}
         >
+          <Menu
+            showMenu={this.state.showMenu}
+            toggleMenu={this.toggleMenu}
+          />
+          <div className='tabs-wrapper'>
             <Tabs
                 getUnderlineStyle={this.getUnderlineStyle}
                 createTabs={this.createTabs}
-            />            
+            />
+          </div>            
         </div>        
     );
   }

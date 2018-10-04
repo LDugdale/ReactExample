@@ -39,8 +39,8 @@ export default class PasswordForgetContainer extends Component {
         event.preventDefault();      
     }
 
-    handleChange(event){
-        this.setState(updateByPropertyName('email', event.target.value))
+    handleChange(key, value){
+        this.setState(updateByPropertyName(key, value))
     }
 
     render(){

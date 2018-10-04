@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import Header, {headers} from '../header';
 import Footer from '../footer';
 import pages from '../../objects/pages';
-
+import * as routes from '../../routing/appRoutes';
 
 const INITIAL_STATE = {
     active: 'plants'
@@ -24,7 +24,9 @@ export default class HomeContainer extends Component {
         return(
             <div className="container">
                 <Header header={headers.PRIMARY} />
-                <div className="content" />
+                <div className="content">
+                    {routes.homeRoutes()}
+                </div>
                 <Footer
                     pages={pages}
                     active={this.state.active}

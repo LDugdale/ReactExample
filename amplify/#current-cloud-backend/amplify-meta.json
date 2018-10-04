@@ -1,0 +1,38 @@
+{
+	"providers": {
+		"awscloudformation": {
+			"AuthRoleName": "lanted-20181001212359-authRole",
+			"UnauthRoleArn": "arn:aws:iam::351823263517:role/lanted-20181001212359-unauthRole",
+			"AuthRoleArn": "arn:aws:iam::351823263517:role/lanted-20181001212359-authRole",
+			"Region": "eu-west-1",
+			"DeploymentBucketName": "lanted-20181001212359-deployment",
+			"UnauthRoleName": "lanted-20181001212359-unauthRole",
+			"StackName": "lanted-20181001212359",
+			"StackId": "arn:aws:cloudformation:eu-west-1:351823263517:stack/lanted-20181001212359/ec8a1700-c5b7-11e8-a12d-500c3cd570d2"
+		}
+	},
+	"auth": {
+		"cognitoab092b19": {
+			"service": "Cognito",
+			"providerPlugin": "awscloudformation"
+		}
+	},
+	"api": {
+		"planted": {
+			"service": "AppSync",
+			"providerPlugin": "awscloudformation",
+			"output": {
+				"securityType": "API_KEY",
+				"GraphQLAPIIdOutput": "ehvuy77fd5c6fh3rs57k2tbsjm",
+				"GraphQLAPIEndpointOutput": "https://5wbptssaafe3riny5ojish5lq4.appsync-api.eu-west-1.amazonaws.com/graphql",
+				"GraphQLAPIKeyOutput": "da2-pbvhqzwmrfe6lhn5g4rqciolda"
+			},
+			"providerMetadata": {
+				"s3TemplateURL": "https://s3.amazonaws.com/lanted-20181001212359-deployment/amplify-cfn-templates/api/cloudformation-template.json",
+				"logicalId": "apiplanted"
+			},
+			"lastPushTimeStamp": "2018-10-03T19:53:05.211Z",
+			"lastPushDirHash": "7u83NsSxx//6PK1N4+gOAfwEtR0="
+		}
+	}
+}

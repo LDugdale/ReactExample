@@ -1,0 +1,404 @@
+type Mutation {
+  createUser(input: CreateUserInput!): User
+  updateUser(input: UpdateUserInput!): User
+  deleteUser(input: DeleteUserInput!): User
+  createPlant(input: CreatePlantInput!): Plant
+  updatePlant(input: UpdatePlantInput!): Plant
+  deletePlant(input: DeletePlantInput!): Plant
+  createPlantCommonNames(input: CreatePlantCommonNamesInput!): PlantCommonNames
+  updatePlantCommonNames(input: UpdatePlantCommonNamesInput!): PlantCommonNames
+  deletePlantCommonNames(input: DeletePlantCommonNamesInput!): PlantCommonNames
+  createPlantSynonyms(input: CreatePlantSynonymsInput!): PlantSynonyms
+  updatePlantSynonyms(input: UpdatePlantSynonymsInput!): PlantSynonyms
+  deletePlantSynonyms(input: DeletePlantSynonymsInput!): PlantSynonyms
+  createPlantExtraInformation(input: CreatePlantExtraInformationInput!): PlantExtraInformation
+  updatePlantExtraInformation(input: UpdatePlantExtraInformationInput!): PlantExtraInformation
+  deletePlantExtraInformation(input: DeletePlantExtraInformationInput!): PlantExtraInformation
+}
+
+type Query {
+  getUser(id: ID!): User
+  listUsers(filter: ModelUserFilterInput, limit: Int, nextToken: String): ModelUserConnection
+  getPlant(id: ID!): Plant
+  listPlants(filter: ModelPlantFilterInput, limit: Int, nextToken: String): ModelPlantConnection
+  getPlantCommonNames(id: ID!): PlantCommonNames
+  listPlantCommonNamess(filter: ModelPlantCommonNamesFilterInput, limit: Int, nextToken: String): ModelPlantCommonNamesConnection
+  getPlantSynonyms(id: ID!): PlantSynonyms
+  listPlantSynonymss(filter: ModelPlantSynonymsFilterInput, limit: Int, nextToken: String): ModelPlantSynonymsConnection
+  getPlantExtraInformation(id: ID!): PlantExtraInformation
+  listPlantExtraInformations(filter: ModelPlantExtraInformationFilterInput, limit: Int, nextToken: String): ModelPlantExtraInformationConnection
+  searchPlants(filter: SearchablePlantFilterInput, sort: SearchablePlantSortInput, limit: Int, nextToken: Int): SearchablePlantConnection
+  searchPlantCommonNamess(filter: SearchablePlantCommonNamesFilterInput, sort: SearchablePlantCommonNamesSortInput, limit: Int, nextToken: Int): SearchablePlantCommonNamesConnection
+  searchPlantSynonymss(filter: SearchablePlantSynonymsFilterInput, sort: SearchablePlantSynonymsSortInput, limit: Int, nextToken: Int): SearchablePlantSynonymsConnection
+}
+
+type Subscription {
+  onCreateUser: User @aws_subscribe(mutations: ["createUser"])
+  onUpdateUser: User @aws_subscribe(mutations: ["updateUser"])
+  onDeleteUser: User @aws_subscribe(mutations: ["deleteUser"])
+  onCreatePlant: Plant @aws_subscribe(mutations: ["createPlant"])
+  onUpdatePlant: Plant @aws_subscribe(mutations: ["updatePlant"])
+  onDeletePlant: Plant @aws_subscribe(mutations: ["deletePlant"])
+  onCreatePlantCommonNames: PlantCommonNames @aws_subscribe(mutations: ["createPlantCommonNames"])
+  onUpdatePlantCommonNames: PlantCommonNames @aws_subscribe(mutations: ["updatePlantCommonNames"])
+  onDeletePlantCommonNames: PlantCommonNames @aws_subscribe(mutations: ["deletePlantCommonNames"])
+  onCreatePlantSynonyms: PlantSynonyms @aws_subscribe(mutations: ["createPlantSynonyms"])
+  onUpdatePlantSynonyms: PlantSynonyms @aws_subscribe(mutations: ["updatePlantSynonyms"])
+  onDeletePlantSynonyms: PlantSynonyms @aws_subscribe(mutations: ["deletePlantSynonyms"])
+  onCreatePlantExtraInformation: PlantExtraInformation @aws_subscribe(mutations: ["createPlantExtraInformation"])
+  onUpdatePlantExtraInformation: PlantExtraInformation @aws_subscribe(mutations: ["updatePlantExtraInformation"])
+  onDeletePlantExtraInformation: PlantExtraInformation @aws_subscribe(mutations: ["deletePlantExtraInformation"])
+}
+
+type User {
+  id: ID!
+  username: String!
+}
+
+enum ModelSortDirection {
+  ASC
+  DESC
+}
+
+type ModelUserConnection {
+  items: [User]
+  nextToken: String
+}
+
+input ModelStringFilterInput {
+  ne: String
+  eq: String
+  le: String
+  lt: String
+  ge: String
+  gt: String
+  contains: String
+  notContains: String
+  between: [String]
+  beginsWith: String
+}
+
+input ModelIDFilterInput {
+  ne: ID
+  eq: ID
+  le: ID
+  lt: ID
+  ge: ID
+  gt: ID
+  contains: ID
+  notContains: ID
+  between: [ID]
+  beginsWith: ID
+}
+
+input ModelIntFilterInput {
+  ne: Int
+  eq: Int
+  le: Int
+  lt: Int
+  ge: Int
+  gt: Int
+  contains: Int
+  notContains: Int
+  between: [Int]
+}
+
+input ModelFloatFilterInput {
+  ne: Float
+  eq: Float
+  le: Float
+  lt: Float
+  ge: Float
+  gt: Float
+  contains: Float
+  notContains: Float
+  between: [Float]
+}
+
+input ModelBooleanFilterInput {
+  ne: Boolean
+  eq: Boolean
+}
+
+input ModelUserFilterInput {
+  id: ModelIDFilterInput
+  username: ModelStringFilterInput
+  and: [ModelUserFilterInput]
+  or: [ModelUserFilterInput]
+  not: ModelUserFilterInput
+}
+
+input CreateUserInput {
+  username: String!
+}
+
+input UpdateUserInput {
+  id: ID!
+  username: String
+}
+
+input DeleteUserInput {
+  id: ID
+}
+
+type Plant {
+  id: ID!
+  latinName: String!
+  genus: String!
+  commonNames(filter: ModelPlantCommonNamesFilterInput, sortDirection: ModelSortDirection, limit: Int, nextToken: String): ModelPlantCommonNamesConnection
+  synonyms(filter: ModelPlantSynonymsFilterInput, sortDirection: ModelSortDirection, limit: Int, nextToken: String): ModelPlantSynonymsConnection
+  extraInformation(filter: ModelPlantExtraInformationFilterInput, sortDirection: ModelSortDirection, limit: Int, nextToken: String): ModelPlantExtraInformationConnection
+}
+
+type ModelPlantConnection {
+  items: [Plant]
+  nextToken: String
+}
+
+input ModelPlantFilterInput {
+  id: ModelIDFilterInput
+  latinName: ModelStringFilterInput
+  genus: ModelStringFilterInput
+  and: [ModelPlantFilterInput]
+  or: [ModelPlantFilterInput]
+  not: ModelPlantFilterInput
+}
+
+input CreatePlantInput {
+  latinName: String!
+  genus: String!
+}
+
+input UpdatePlantInput {
+  id: ID!
+  latinName: String
+  genus: String
+}
+
+input DeletePlantInput {
+  id: ID
+}
+
+type PlantCommonNames {
+  id: ID!
+  commonName: String!
+}
+
+type ModelPlantCommonNamesConnection {
+  items: [PlantCommonNames]
+  nextToken: String
+}
+
+input ModelPlantCommonNamesFilterInput {
+  id: ModelIDFilterInput
+  commonName: ModelStringFilterInput
+  and: [ModelPlantCommonNamesFilterInput]
+  or: [ModelPlantCommonNamesFilterInput]
+  not: ModelPlantCommonNamesFilterInput
+}
+
+input CreatePlantCommonNamesInput {
+  commonName: String!
+  plantCommonNamesId: ID
+}
+
+input UpdatePlantCommonNamesInput {
+  id: ID!
+  commonName: String
+  plantCommonNamesId: ID
+}
+
+input DeletePlantCommonNamesInput {
+  id: ID
+}
+
+type PlantSynonyms {
+  id: ID!
+  synonym: String!
+}
+
+type ModelPlantSynonymsConnection {
+  items: [PlantSynonyms]
+  nextToken: String
+}
+
+input ModelPlantSynonymsFilterInput {
+  id: ModelIDFilterInput
+  synonym: ModelStringFilterInput
+  and: [ModelPlantSynonymsFilterInput]
+  or: [ModelPlantSynonymsFilterInput]
+  not: ModelPlantSynonymsFilterInput
+}
+
+input CreatePlantSynonymsInput {
+  synonym: String!
+  plantSynonymsId: ID
+}
+
+input UpdatePlantSynonymsInput {
+  id: ID!
+  synonym: String
+  plantSynonymsId: ID
+}
+
+input DeletePlantSynonymsInput {
+  id: ID
+}
+
+type PlantExtraInformation {
+  id: ID!
+  information: String!
+}
+
+type ModelPlantExtraInformationConnection {
+  items: [PlantExtraInformation]
+  nextToken: String
+}
+
+input ModelPlantExtraInformationFilterInput {
+  id: ModelIDFilterInput
+  information: ModelStringFilterInput
+  and: [ModelPlantExtraInformationFilterInput]
+  or: [ModelPlantExtraInformationFilterInput]
+  not: ModelPlantExtraInformationFilterInput
+}
+
+input CreatePlantExtraInformationInput {
+  information: String!
+  plantExtraInformationId: ID
+}
+
+input UpdatePlantExtraInformationInput {
+  id: ID!
+  information: String
+  plantExtraInformationId: ID
+}
+
+input DeletePlantExtraInformationInput {
+  id: ID
+}
+
+input SearchableStringFilterInput {
+  ne: String
+  eq: String
+  match: String
+  matchPhrase: String
+  matchPhrasePrefix: String
+  multiMatch: String
+  exists: Boolean
+  wildcard: String
+  regexp: String
+}
+
+input SearchableIDFilterInput {
+  ne: ID
+  eq: ID
+  match: ID
+  matchPhrase: ID
+  matchPhrasePrefix: ID
+  multiMatch: ID
+  exists: Boolean
+  wildcard: ID
+  regexp: ID
+}
+
+input SearchableIntFilterInput {
+  ne: Int
+  gt: Int
+  lt: Int
+  gte: Int
+  lte: Int
+  eq: Int
+  range: [Int]
+}
+
+input SearchableFloatFilterInput {
+  ne: Float
+  gt: Float
+  lt: Float
+  gte: Float
+  lte: Float
+  eq: Float
+  range: [Float]
+}
+
+input SearchableBooleanFilterInput {
+  eq: Boolean
+  ne: Boolean
+}
+
+input SearchablePlantFilterInput {
+  id: SearchableIDFilterInput
+  latinName: SearchableStringFilterInput
+  genus: SearchableStringFilterInput
+  and: [SearchablePlantFilterInput]
+  or: [SearchablePlantFilterInput]
+  not: SearchablePlantFilterInput
+}
+
+enum SearchableSortDirection {
+  asc
+  desc
+}
+
+enum SearchablePlantSortableFields {
+  id
+  latinName
+  genus
+}
+
+input SearchablePlantSortInput {
+  field: SearchablePlantSortableFields
+  direction: SearchableSortDirection
+}
+
+type SearchablePlantConnection {
+  items: [Plant]
+  nextToken: String
+}
+
+input SearchablePlantCommonNamesFilterInput {
+  id: SearchableIDFilterInput
+  commonName: SearchableStringFilterInput
+  and: [SearchablePlantCommonNamesFilterInput]
+  or: [SearchablePlantCommonNamesFilterInput]
+  not: SearchablePlantCommonNamesFilterInput
+}
+
+enum SearchablePlantCommonNamesSortableFields {
+  id
+  commonName
+}
+
+input SearchablePlantCommonNamesSortInput {
+  field: SearchablePlantCommonNamesSortableFields
+  direction: SearchableSortDirection
+}
+
+type SearchablePlantCommonNamesConnection {
+  items: [PlantCommonNames]
+  nextToken: String
+}
+
+input SearchablePlantSynonymsFilterInput {
+  id: SearchableIDFilterInput
+  synonym: SearchableStringFilterInput
+  and: [SearchablePlantSynonymsFilterInput]
+  or: [SearchablePlantSynonymsFilterInput]
+  not: SearchablePlantSynonymsFilterInput
+}
+
+enum SearchablePlantSynonymsSortableFields {
+  id
+  synonym
+}
+
+input SearchablePlantSynonymsSortInput {
+  field: SearchablePlantSynonymsSortableFields
+  direction: SearchableSortDirection
+}
+
+type SearchablePlantSynonymsConnection {
+  items: [PlantSynonyms]
+  nextToken: String
+}

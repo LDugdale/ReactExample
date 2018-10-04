@@ -1,0 +1,12 @@
+.picker-wrapper .popup-wrapper {
+    background-color: white;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.picker-wrapper .popup-wrapper .popup-header {
+    background-color: var(--primary-color);
+    padding: 15px;
+}

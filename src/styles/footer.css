@@ -1,7 +1,12 @@
 .footer {
-  position: relative;
   background-color: var(--white);
   border-top: 1px solid var(--line-separator-color);
+}
+
+.tabs-wrapper{
+  height: 100%;
+  width: 100%;
+  position: relative;
 }
 
 .tabs {
@@ -86,3 +91,30 @@
   height: 45px;
 }
 
+.footer-menu {
+  position: absolute;
+  width: 60px;
+  height: 200px;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 165px;
+}
+
+.footer-menu .footer-menu-icon {
+  margin-bottom: 10px;
+}
+
+.footer-menu .footer-menu-icon .icon-wrapper {
+  background-color: var(--white);
+  border: 1px solid var(--line-separator-color);
+  border-radius: 100%;
+  padding: 10px;
+}
+
+.footer-menu-background {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0px;
+  left: 0px;
+}

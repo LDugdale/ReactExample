@@ -1,0 +1,33 @@
+type User @model {
+  id: ID!
+  username: String!
+}
+
+type Plant @model @searchable {
+  id: ID!
+  latinName: String!
+  genus: String!
+  commonNames: [PlantCommonNames] @connection(name: "CommonNames")
+  synonyms: [PlantSynonyms] @connection(name: "Synonyms")
+  extraInformation: [PlantExtraInformation] @connection(name: "ExtraInformation")
+}
+
+type PlantCommonNames @model @searchable {
+  id: ID!
+  commonName: String!
+  plant: Plant @connection(name: "CommonNames")
+}
+
+type PlantSynonyms @model @searchable {
+  id: ID!
+  synonym: String!
+  plant: Plant @connection(name: "Synonyms")
+}
+
+type PlantExtraInformation @model {
+  id: ID!
+  information: String!
+  plant: Plant @connection(name: "ExtraInformation")
+}
+
+

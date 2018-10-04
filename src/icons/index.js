@@ -8,7 +8,12 @@ const Icon = (props) => {
     }
 
     return (
-        <div className={iconClassName()}>
+        <div 
+            className={iconClassName()}
+            onClick={event => {
+                return props.onClick ? props.onClick(event, props.iconClassName) : null
+            }}
+        >
             <div className='icon-wrapper'>
                 {props.icon}
             </div>

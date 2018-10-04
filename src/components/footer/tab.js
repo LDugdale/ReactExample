@@ -1,5 +1,6 @@
 import React from 'react';
 import Icon from '../../icons';
+import { Link } from 'react-router-dom';
 
 const Tab = (props) => {
     const itemClass = `${props.page.pageKey} item`
@@ -11,7 +12,11 @@ const Tab = (props) => {
         >
             <div className={itemClass} key={props.page.pageKey}>
             <div className='item-background' />
-                <Icon icon={props.page.pageIcon}/>
+                <Link 
+                    to={props.page.route}
+                >
+                    <Icon icon={props.page.pageIcon}/>
+                </Link>
             </div>
         </div>
     );

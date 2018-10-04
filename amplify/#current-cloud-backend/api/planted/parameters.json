@@ -1,0 +1,9 @@
+{
+    "AppSyncApiName": "planted",
+    "schemaGraphql": "s3://lanted-20181001212359-deployment/amplify-appsync-files/schema.graphql.1538595568254",
+    "ElasticSearchStreamingLambdaCodeS3Key": "amplify-appsync-files/python_streaming_function.zip",
+    "ElasticSearchStreamingLambdaCodeS3Bucket": "lanted-20181001212359-deployment",
+    "ResolverBucket": "lanted-20181001212359-deployment",
+    "ResolverRootKey": "amplify-appsync-files",
+    "DeploymentTimestamp": "1538595568254"
+}

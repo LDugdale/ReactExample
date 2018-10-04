@@ -5,7 +5,7 @@ const PrimaryHeader = () => {
 
     return(
         <div className='primary-header'>
-            <Icon icon={icons.HAMBURGER} iconClassName='hamburger' />
+            <Icon icon={icons.HAMBURGER} iconClassName='action hamburger' />
         </div>
     );
 }
