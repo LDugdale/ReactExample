@@ -28,6 +28,7 @@ class SignInContainer extends Component {
   }
 
   handleSubmit = (event) => {
+    debugger;
     const {
       email,
       password,
@@ -35,7 +36,6 @@ class SignInContainer extends Component {
     spinnerController.show();
     signIn(email, password)
       .then(() => {
-        debugger;
         spinnerController.hide();
         this.setState(() => ({ ...INITIAL_STATE }));
         this.props.history.push(routes.HOME);

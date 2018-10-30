@@ -1369,14 +1369,14 @@
             },
             "DependsOn": "GraphQLSchema"
         },
-        "PlantCommonNamesTable": {
+        "PlantNamesTable": {
             "Type": "AWS::DynamoDB::Table",
             "Properties": {
                 "TableName": {
                     "Fn::Join": [
                         "-",
                         [
-                            "PlantCommonNames",
+                            "PlantNames",
                             {
                                 "Fn::GetAtt": [
                                     "GraphQLAPI",
@@ -1398,7 +1398,7 @@
                         "AttributeType": "S"
                     },
                     {
-                        "AttributeName": "plantCommonNamesId",
+                        "AttributeName": "plantNamesPlantId",
                         "AttributeType": "S"
                     }
                 ],
@@ -1415,10 +1415,10 @@
                 },
                 "GlobalSecondaryIndexes": [
                     {
-                        "IndexName": "gsi-Plant.commonNames",
+                        "IndexName": "gsi-Names",
                         "KeySchema": [
                             {
-                                "AttributeName": "plantCommonNamesId",
+                                "AttributeName": "plantNamesPlantId",
                                 "KeyType": "HASH"
                             }
                         ],
@@ -1437,14 +1437,14 @@
                 ]
             }
         },
-        "PlantCommonNamesIAMRole": {
+        "PlantNamesIAMRole": {
             "Type": "AWS::IAM::Role",
             "Properties": {
                 "RoleName": {
                     "Fn::Join": [
                         "-",
                         [
-                            "PlantCommonNamesTable",
+                            "PlantNamesTable",
                             "role",
                             {
                                 "Fn::GetAtt": [
@@ -1488,7 +1488,7 @@
                                     "Resource": [
                                         {
                                             "Fn::GetAtt": [
-                                                "PlantCommonNamesTable",
+                                                "PlantNamesTable",
                                                 "Arn"
                                             ]
                                         },
@@ -1498,7 +1498,7 @@
                                                 [
                                                     {
                                                         "Fn::GetAtt": [
-                                                            "PlantCommonNamesTable",
+                                                            "PlantNamesTable",
                                                             "Arn"
                                                         ]
                                                     },
@@ -1514,7 +1514,7 @@
                 ]
             }
         },
-        "PlantCommonNamesDataSource": {
+        "PlantNamesDataSource": {
             "Type": "AWS::AppSync::DataSource",
             "Properties": {
                 "ApiId": {
@@ -1523,11 +1523,11 @@
                         "ApiId"
                     ]
                 },
-                "Name": "PlantCommonNamesTable",
+                "Name": "PlantNamesTable",
                 "Type": "AMAZON_DYNAMODB",
                 "ServiceRoleArn": {
                     "Fn::GetAtt": [
-                        "PlantCommonNamesIAMRole",
+                        "PlantNamesIAMRole",
                         "Arn"
                     ]
                 },
@@ -1540,7 +1540,7 @@
                                     ":",
                                     {
                                         "Fn::GetAtt": [
-                                            "PlantCommonNamesTable",
+                                            "PlantNamesTable",
                                             "Arn"
                                         ]
                                     }
@@ -1549,12 +1549,12 @@
                         ]
                     },
                     "TableName": {
-                        "Ref": "PlantCommonNamesTable"
+                        "Ref": "PlantNamesTable"
                     }
                 }
             }
         },
-        "GetPlantCommonNamesResolver": {
+        "GetPlantNamesResolver": {
             "Type": "AWS::AppSync::Resolver",
             "Properties": {
                 "ApiId": {
@@ -1565,11 +1565,11 @@
                 },
                 "DataSourceName": {
                     "Fn::GetAtt": [
-                        "PlantCommonNamesDataSource",
+                        "PlantNamesDataSource",
                         "Name"
                     ]
                 },
-                "FieldName": "getPlantCommonNames",
+                "FieldName": "getPlantNames",
                 "TypeName": "Query",
                 "RequestMappingTemplateS3Location": {
                     "Fn::Join": [
@@ -1591,7 +1591,7 @@
                                                 ".",
                                                 [
                                                     "Query",
-                                                    "getPlantCommonNames",
+                                                    "getPlantNames",
                                                     "request",
                                                     {
                                                         "Ref": "DeploymentTimestamp"
@@ -1625,7 +1625,7 @@
                                                 ".",
                                                 [
                                                     "Query",
-                                                    "getPlantCommonNames",
+                                                    "getPlantNames",
                                                     "response",
                                                     {
                                                         "Ref": "DeploymentTimestamp"
@@ -1642,7 +1642,7 @@
             },
             "DependsOn": "GraphQLSchema"
         },
-        "ListPlantCommonNamesResolver": {
+        "ListPlantNamesResolver": {
             "Type": "AWS::AppSync::Resolver",
             "Properties": {
                 "ApiId": {
@@ -1653,11 +1653,11 @@
                 },
                 "DataSourceName": {
                     "Fn::GetAtt": [
-                        "PlantCommonNamesDataSource",
+                        "PlantNamesDataSource",
                         "Name"
                     ]
                 },
-                "FieldName": "listPlantCommonNamess",
+                "FieldName": "listPlantNamess",
                 "TypeName": "Query",
                 "RequestMappingTemplateS3Location": {
                     "Fn::Join": [
@@ -1679,7 +1679,7 @@
                                                 ".",
                                                 [
                                                     "Query",
-                                                    "listPlantCommonNamess",
+                                                    "listPlantNamess",
                                                     "request",
                                                     {
                                                         "Ref": "DeploymentTimestamp"
@@ -1713,7 +1713,7 @@
                                                 ".",
                                                 [
                                                     "Query",
-                                                    "listPlantCommonNamess",
+                                                    "listPlantNamess",
                                                     "response",
                                                     {
                                                         "Ref": "DeploymentTimestamp"
@@ -1730,7 +1730,7 @@
             },
             "DependsOn": "GraphQLSchema"
         },
-        "CreatePlantCommonNamesResolver": {
+        "CreatePlantNamesResolver": {
             "Type": "AWS::AppSync::Resolver",
             "Properties": {
                 "ApiId": {
@@ -1741,11 +1741,11 @@
                 },
                 "DataSourceName": {
                     "Fn::GetAtt": [
-                        "PlantCommonNamesDataSource",
+                        "PlantNamesDataSource",
                         "Name"
                     ]
                 },
-                "FieldName": "createPlantCommonNames",
+                "FieldName": "createPlantNames",
                 "TypeName": "Mutation",
                 "RequestMappingTemplateS3Location": {
                     "Fn::Join": [
@@ -1767,7 +1767,7 @@
                                                 ".",
                                                 [
                                                     "Mutation",
-                                                    "createPlantCommonNames",
+                                                    "createPlantNames",
                                                     "request",
                                                     {
                                                         "Ref": "DeploymentTimestamp"
@@ -1801,7 +1801,7 @@
                                                 ".",
                                                 [
                                                     "Mutation",
-                                                    "createPlantCommonNames",
+                                                    "createPlantNames",
                                                     "response",
                                                     {
                                                         "Ref": "DeploymentTimestamp"
@@ -1818,7 +1818,7 @@
             },
             "DependsOn": "GraphQLSchema"
         },
-        "UpdatePlantCommonNamesResolver": {
+        "UpdatePlantNamesResolver": {
             "Type": "AWS::AppSync::Resolver",
             "Properties": {
                 "ApiId": {
@@ -1829,11 +1829,11 @@
                 },
                 "DataSourceName": {
                     "Fn::GetAtt": [
-                        "PlantCommonNamesDataSource",
+                        "PlantNamesDataSource",
                         "Name"
                     ]
                 },
-                "FieldName": "updatePlantCommonNames",
+                "FieldName": "updatePlantNames",
                 "TypeName": "Mutation",
                 "RequestMappingTemplateS3Location": {
                     "Fn::Join": [
@@ -1855,7 +1855,7 @@
                                                 ".",
                                                 [
                                                     "Mutation",
-                                                    "updatePlantCommonNames",
+                                                    "updatePlantNames",
                                                     "request",
                                                     {
                                                         "Ref": "DeploymentTimestamp"
@@ -1889,7 +1889,7 @@
                                                 ".",
                                                 [
                                                     "Mutation",
-                                                    "updatePlantCommonNames",
+                                                    "updatePlantNames",
                                                     "response",
                                                     {
                                                         "Ref": "DeploymentTimestamp"
@@ -1906,7 +1906,7 @@
             },
             "DependsOn": "GraphQLSchema"
         },
-        "DeletePlantCommonNamesResolver": {
+        "DeletePlantNamesResolver": {
             "Type": "AWS::AppSync::Resolver",
             "Properties": {
                 "ApiId": {
@@ -1917,11 +1917,11 @@
                 },
                 "DataSourceName": {
                     "Fn::GetAtt": [
-                        "PlantCommonNamesDataSource",
+                        "PlantNamesDataSource",
                         "Name"
                     ]
                 },
-                "FieldName": "deletePlantCommonNames",
+                "FieldName": "deletePlantNames",
                 "TypeName": "Mutation",
                 "RequestMappingTemplateS3Location": {
                     "Fn::Join": [
@@ -1943,7 +1943,7 @@
                                                 ".",
                                                 [
                                                     "Mutation",
-                                                    "deletePlantCommonNames",
+                                                    "deletePlantNames",
                                                     "request",
                                                     {
                                                         "Ref": "DeploymentTimestamp"
@@ -1977,632 +1977,7 @@
                                                 ".",
                                                 [
                                                     "Mutation",
-                                                    "deletePlantCommonNames",
-                                                    "response",
-                                                    {
-                                                        "Ref": "DeploymentTimestamp"
-                                                    }
-                                                ]
-                                            ]
-                                        }
-                                    ]
-                                ]
-                            }
-                        ]
-                    ]
-                }
-            },
-            "DependsOn": "GraphQLSchema"
-        },
-        "PlantSynonymsTable": {
-            "Type": "AWS::DynamoDB::Table",
-            "Properties": {
-                "TableName": {
-                    "Fn::Join": [
-                        "-",
-                        [
-                            "PlantSynonyms",
-                            {
-                                "Fn::GetAtt": [
-                                    "GraphQLAPI",
-                                    "ApiId"
-                                ]
-                            }
-                        ]
-                    ]
-                },
-                "KeySchema": [
-                    {
-                        "AttributeName": "id",
-                        "KeyType": "HASH"
-                    }
-                ],
-                "AttributeDefinitions": [
-                    {
-                        "AttributeName": "id",
-                        "AttributeType": "S"
-                    },
-                    {
-                        "AttributeName": "plantSynonymsId",
-                        "AttributeType": "S"
-                    }
-                ],
-                "ProvisionedThroughput": {
-                    "ReadCapacityUnits": {
-                        "Ref": "DynamoDBModelTableReadIOPS"
-                    },
-                    "WriteCapacityUnits": {
-                        "Ref": "DynamoDBModelTableWriteIOPS"
-                    }
-                },
-                "StreamSpecification": {
-                    "StreamViewType": "NEW_AND_OLD_IMAGES"
-                },
-                "GlobalSecondaryIndexes": [
-                    {
-                        "IndexName": "gsi-Plant.synonyms",
-                        "KeySchema": [
-                            {
-                                "AttributeName": "plantSynonymsId",
-                                "KeyType": "HASH"
-                            }
-                        ],
-                        "Projection": {
-                            "ProjectionType": "ALL"
-                        },
-                        "ProvisionedThroughput": {
-                            "ReadCapacityUnits": {
-                                "Ref": "DynamoDBModelTableReadIOPS"
-                            },
-                            "WriteCapacityUnits": {
-                                "Ref": "DynamoDBModelTableWriteIOPS"
-                            }
-                        }
-                    }
-                ]
-            }
-        },
-        "PlantSynonymsIAMRole": {
-            "Type": "AWS::IAM::Role",
-            "Properties": {
-                "RoleName": {
-                    "Fn::Join": [
-                        "-",
-                        [
-                            "PlantSynonymsTable",
-                            "role",
-                            {
-                                "Fn::GetAtt": [
-                                    "GraphQLAPI",
-                                    "ApiId"
-                                ]
-                            }
-                        ]
-                    ]
-                },
-                "AssumeRolePolicyDocument": {
-                    "Version": "2012-10-17",
-                    "Statement": [
-                        {
-                            "Effect": "Allow",
-                            "Principal": {
-                                "Service": "appsync.amazonaws.com"
-                            },
-                            "Action": "sts:AssumeRole"
-                        }
-                    ]
-                },
-                "Policies": [
-                    {
-                        "PolicyName": "DynamoDBAccess",
-                        "PolicyDocument": {
-                            "Version": "2012-10-17",
-                            "Statement": [
-                                {
-                                    "Effect": "Allow",
-                                    "Action": [
-                                        "dynamodb:BatchGetItem",
-                                        "dynamodb:BatchWriteItem",
-                                        "dynamodb:PutItem",
-                                        "dynamodb:DeleteItem",
-                                        "dynamodb:GetItem",
-                                        "dynamodb:Scan",
-                                        "dynamodb:Query",
-                                        "dynamodb:UpdateItem"
-                                    ],
-                                    "Resource": [
-                                        {
-                                            "Fn::GetAtt": [
-                                                "PlantSynonymsTable",
-                                                "Arn"
-                                            ]
-                                        },
-                                        {
-                                            "Fn::Join": [
-                                                "/",
-                                                [
-                                                    {
-                                                        "Fn::GetAtt": [
-                                                            "PlantSynonymsTable",
-                                                            "Arn"
-                                                        ]
-                                                    },
-                                                    "*"
-                                                ]
-                                            ]
-                                        }
-                                    ]
-                                }
-                            ]
-                        }
-                    }
-                ]
-            }
-        },
-        "PlantSynonymsDataSource": {
-            "Type": "AWS::AppSync::DataSource",
-            "Properties": {
-                "ApiId": {
-                    "Fn::GetAtt": [
-                        "GraphQLAPI",
-                        "ApiId"
-                    ]
-                },
-                "Name": "PlantSynonymsTable",
-                "Type": "AMAZON_DYNAMODB",
-                "ServiceRoleArn": {
-                    "Fn::GetAtt": [
-                        "PlantSynonymsIAMRole",
-                        "Arn"
-                    ]
-                },
-                "DynamoDBConfig": {
-                    "AwsRegion": {
-                        "Fn::Select": [
-                            3,
-                            {
-                                "Fn::Split": [
-                                    ":",
-                                    {
-                                        "Fn::GetAtt": [
-                                            "PlantSynonymsTable",
-                                            "Arn"
-                                        ]
-                                    }
-                                ]
-                            }
-                        ]
-                    },
-                    "TableName": {
-                        "Ref": "PlantSynonymsTable"
-                    }
-                }
-            }
-        },
-        "GetPlantSynonymsResolver": {
-            "Type": "AWS::AppSync::Resolver",
-            "Properties": {
-                "ApiId": {
-                    "Fn::GetAtt": [
-                        "GraphQLAPI",
-                        "ApiId"
-                    ]
-                },
-                "DataSourceName": {
-                    "Fn::GetAtt": [
-                        "PlantSynonymsDataSource",
-                        "Name"
-                    ]
-                },
-                "FieldName": "getPlantSynonyms",
-                "TypeName": "Query",
-                "RequestMappingTemplateS3Location": {
-                    "Fn::Join": [
-                        "",
-                        [
-                            "s3://",
-                            {
-                                "Fn::Join": [
-                                    "/",
-                                    [
-                                        {
-                                            "Ref": "ResolverBucket"
-                                        },
-                                        {
-                                            "Ref": "ResolverRootKey"
-                                        },
-                                        {
-                                            "Fn::Join": [
-                                                ".",
-                                                [
-                                                    "Query",
-                                                    "getPlantSynonyms",
-                                                    "request",
-                                                    {
-                                                        "Ref": "DeploymentTimestamp"
-                                                    }
-                                                ]
-                                            ]
-                                        }
-                                    ]
-                                ]
-                            }
-                        ]
-                    ]
-                },
-                "ResponseMappingTemplateS3Location": {
-                    "Fn::Join": [
-                        "",
-                        [
-                            "s3://",
-                            {
-                                "Fn::Join": [
-                                    "/",
-                                    [
-                                        {
-                                            "Ref": "ResolverBucket"
-                                        },
-                                        {
-                                            "Ref": "ResolverRootKey"
-                                        },
-                                        {
-                                            "Fn::Join": [
-                                                ".",
-                                                [
-                                                    "Query",
-                                                    "getPlantSynonyms",
-                                                    "response",
-                                                    {
-                                                        "Ref": "DeploymentTimestamp"
-                                                    }
-                                                ]
-                                            ]
-                                        }
-                                    ]
-                                ]
-                            }
-                        ]
-                    ]
-                }
-            },
-            "DependsOn": "GraphQLSchema"
-        },
-        "ListPlantSynonymsResolver": {
-            "Type": "AWS::AppSync::Resolver",
-            "Properties": {
-                "ApiId": {
-                    "Fn::GetAtt": [
-                        "GraphQLAPI",
-                        "ApiId"
-                    ]
-                },
-                "DataSourceName": {
-                    "Fn::GetAtt": [
-                        "PlantSynonymsDataSource",
-                        "Name"
-                    ]
-                },
-                "FieldName": "listPlantSynonymss",
-                "TypeName": "Query",
-                "RequestMappingTemplateS3Location": {
-                    "Fn::Join": [
-                        "",
-                        [
-                            "s3://",
-                            {
-                                "Fn::Join": [
-                                    "/",
-                                    [
-                                        {
-                                            "Ref": "ResolverBucket"
-                                        },
-                                        {
-                                            "Ref": "ResolverRootKey"
-                                        },
-                                        {
-                                            "Fn::Join": [
-                                                ".",
-                                                [
-                                                    "Query",
-                                                    "listPlantSynonymss",
-                                                    "request",
-                                                    {
-                                                        "Ref": "DeploymentTimestamp"
-                                                    }
-                                                ]
-                                            ]
-                                        }
-                                    ]
-                                ]
-                            }
-                        ]
-                    ]
-                },
-                "ResponseMappingTemplateS3Location": {
-                    "Fn::Join": [
-                        "",
-                        [
-                            "s3://",
-                            {
-                                "Fn::Join": [
-                                    "/",
-                                    [
-                                        {
-                                            "Ref": "ResolverBucket"
-                                        },
-                                        {
-                                            "Ref": "ResolverRootKey"
-                                        },
-                                        {
-                                            "Fn::Join": [
-                                                ".",
-                                                [
-                                                    "Query",
-                                                    "listPlantSynonymss",
-                                                    "response",
-                                                    {
-                                                        "Ref": "DeploymentTimestamp"
-                                                    }
-                                                ]
-                                            ]
-                                        }
-                                    ]
-                                ]
-                            }
-                        ]
-                    ]
-                }
-            },
-            "DependsOn": "GraphQLSchema"
-        },
-        "CreatePlantSynonymsResolver": {
-            "Type": "AWS::AppSync::Resolver",
-            "Properties": {
-                "ApiId": {
-                    "Fn::GetAtt": [
-                        "GraphQLAPI",
-                        "ApiId"
-                    ]
-                },
-                "DataSourceName": {
-                    "Fn::GetAtt": [
-                        "PlantSynonymsDataSource",
-                        "Name"
-                    ]
-                },
-                "FieldName": "createPlantSynonyms",
-                "TypeName": "Mutation",
-                "RequestMappingTemplateS3Location": {
-                    "Fn::Join": [
-                        "",
-                        [
-                            "s3://",
-                            {
-                                "Fn::Join": [
-                                    "/",
-                                    [
-                                        {
-                                            "Ref": "ResolverBucket"
-                                        },
-                                        {
-                                            "Ref": "ResolverRootKey"
-                                        },
-                                        {
-                                            "Fn::Join": [
-                                                ".",
-                                                [
-                                                    "Mutation",
-                                                    "createPlantSynonyms",
-                                                    "request",
-                                                    {
-                                                        "Ref": "DeploymentTimestamp"
-                                                    }
-                                                ]
-                                            ]
-                                        }
-                                    ]
-                                ]
-                            }
-                        ]
-                    ]
-                },
-                "ResponseMappingTemplateS3Location": {
-                    "Fn::Join": [
-                        "",
-                        [
-                            "s3://",
-                            {
-                                "Fn::Join": [
-                                    "/",
-                                    [
-                                        {
-                                            "Ref": "ResolverBucket"
-                                        },
-                                        {
-                                            "Ref": "ResolverRootKey"
-                                        },
-                                        {
-                                            "Fn::Join": [
-                                                ".",
-                                                [
-                                                    "Mutation",
-                                                    "createPlantSynonyms",
-                                                    "response",
-                                                    {
-                                                        "Ref": "DeploymentTimestamp"
-                                                    }
-                                                ]
-                                            ]
-                                        }
-                                    ]
-                                ]
-                            }
-                        ]
-                    ]
-                }
-            },
-            "DependsOn": "GraphQLSchema"
-        },
-        "UpdatePlantSynonymsResolver": {
-            "Type": "AWS::AppSync::Resolver",
-            "Properties": {
-                "ApiId": {
-                    "Fn::GetAtt": [
-                        "GraphQLAPI",
-                        "ApiId"
-                    ]
-                },
-                "DataSourceName": {
-                    "Fn::GetAtt": [
-                        "PlantSynonymsDataSource",
-                        "Name"
-                    ]
-                },
-                "FieldName": "updatePlantSynonyms",
-                "TypeName": "Mutation",
-                "RequestMappingTemplateS3Location": {
-                    "Fn::Join": [
-                        "",
-                        [
-                            "s3://",
-                            {
-                                "Fn::Join": [
-                                    "/",
-                                    [
-                                        {
-                                            "Ref": "ResolverBucket"
-                                        },
-                                        {
-                                            "Ref": "ResolverRootKey"
-                                        },
-                                        {
-                                            "Fn::Join": [
-                                                ".",
-                                                [
-                                                    "Mutation",
-                                                    "updatePlantSynonyms",
-                                                    "request",
-                                                    {
-                                                        "Ref": "DeploymentTimestamp"
-                                                    }
-                                                ]
-                                            ]
-                                        }
-                                    ]
-                                ]
-                            }
-                        ]
-                    ]
-                },
-                "ResponseMappingTemplateS3Location": {
-                    "Fn::Join": [
-                        "",
-                        [
-                            "s3://",
-                            {
-                                "Fn::Join": [
-                                    "/",
-                                    [
-                                        {
-                                            "Ref": "ResolverBucket"
-                                        },
-                                        {
-                                            "Ref": "ResolverRootKey"
-                                        },
-                                        {
-                                            "Fn::Join": [
-                                                ".",
-                                                [
-                                                    "Mutation",
-                                                    "updatePlantSynonyms",
-                                                    "response",
-                                                    {
-                                                        "Ref": "DeploymentTimestamp"
-                                                    }
-                                                ]
-                                            ]
-                                        }
-                                    ]
-                                ]
-                            }
-                        ]
-                    ]
-                }
-            },
-            "DependsOn": "GraphQLSchema"
-        },
-        "DeletePlantSynonymsResolver": {
-            "Type": "AWS::AppSync::Resolver",
-            "Properties": {
-                "ApiId": {
-                    "Fn::GetAtt": [
-                        "GraphQLAPI",
-                        "ApiId"
-                    ]
-                },
-                "DataSourceName": {
-                    "Fn::GetAtt": [
-                        "PlantSynonymsDataSource",
-                        "Name"
-                    ]
-                },
-                "FieldName": "deletePlantSynonyms",
-                "TypeName": "Mutation",
-                "RequestMappingTemplateS3Location": {
-                    "Fn::Join": [
-                        "",
-                        [
-                            "s3://",
-                            {
-                                "Fn::Join": [
-                                    "/",
-                                    [
-                                        {
-                                            "Ref": "ResolverBucket"
-                                        },
-                                        {
-                                            "Ref": "ResolverRootKey"
-                                        },
-                                        {
-                                            "Fn::Join": [
-                                                ".",
-                                                [
-                                                    "Mutation",
-                                                    "deletePlantSynonyms",
-                                                    "request",
-                                                    {
-                                                        "Ref": "DeploymentTimestamp"
-                                                    }
-                                                ]
-                                            ]
-                                        }
-                                    ]
-                                ]
-                            }
-                        ]
-                    ]
-                },
-                "ResponseMappingTemplateS3Location": {
-                    "Fn::Join": [
-                        "",
-                        [
-                            "s3://",
-                            {
-                                "Fn::Join": [
-                                    "/",
-                                    [
-                                        {
-                                            "Ref": "ResolverBucket"
-                                        },
-                                        {
-                                            "Ref": "ResolverRootKey"
-                                        },
-                                        {
-                                            "Fn::Join": [
-                                                ".",
-                                                [
-                                                    "Mutation",
-                                                    "deletePlantSynonyms",
+                                                    "deletePlantNames",
                                                     "response",
                                                     {
                                                         "Ref": "DeploymentTimestamp"
@@ -2648,7 +2023,7 @@
                         "AttributeType": "S"
                     },
                     {
-                        "AttributeName": "plantExtraInformationId",
+                        "AttributeName": "plantExtraInformationPlantId",
                         "AttributeType": "S"
                     }
                 ],
@@ -2665,10 +2040,10 @@
                 },
                 "GlobalSecondaryIndexes": [
                     {
-                        "IndexName": "gsi-Plant.extraInformation",
+                        "IndexName": "gsi-ExtraInformation",
                         "KeySchema": [
                             {
-                                "AttributeName": "plantExtraInformationId",
+                                "AttributeName": "plantExtraInformationPlantId",
                                 "KeyType": "HASH"
                             }
                         ],
@@ -3255,7 +2630,7 @@
                 },
                 "DataSourceName": {
                     "Fn::GetAtt": [
-                        "PlantCommonNamesDataSource",
+                        "PlantNamesDataSource",
                         "Name"
                     ]
                 },
@@ -3316,94 +2691,6 @@
                                                 [
                                                     "Plant",
                                                     "commonNames",
-                                                    "response",
-                                                    {
-                                                        "Ref": "DeploymentTimestamp"
-                                                    }
-                                                ]
-                                            ]
-                                        }
-                                    ]
-                                ]
-                            }
-                        ]
-                    ]
-                }
-            },
-            "DependsOn": "GraphQLSchema"
-        },
-        "PlantsynonymsResolver": {
-            "Type": "AWS::AppSync::Resolver",
-            "Properties": {
-                "ApiId": {
-                    "Fn::GetAtt": [
-                        "GraphQLAPI",
-                        "ApiId"
-                    ]
-                },
-                "DataSourceName": {
-                    "Fn::GetAtt": [
-                        "PlantSynonymsDataSource",
-                        "Name"
-                    ]
-                },
-                "FieldName": "synonyms",
-                "TypeName": "Plant",
-                "RequestMappingTemplateS3Location": {
-                    "Fn::Join": [
-                        "",
-                        [
-                            "s3://",
-                            {
-                                "Fn::Join": [
-                                    "/",
-                                    [
-                                        {
-                                            "Ref": "ResolverBucket"
-                                        },
-                                        {
-                                            "Ref": "ResolverRootKey"
-                                        },
-                                        {
-                                            "Fn::Join": [
-                                                ".",
-                                                [
-                                                    "Plant",
-                                                    "synonyms",
-                                                    "request",
-                                                    {
-                                                        "Ref": "DeploymentTimestamp"
-                                                    }
-                                                ]
-                                            ]
-                                        }
-                                    ]
-                                ]
-                            }
-                        ]
-                    ]
-                },
-                "ResponseMappingTemplateS3Location": {
-                    "Fn::Join": [
-                        "",
-                        [
-                            "s3://",
-                            {
-                                "Fn::Join": [
-                                    "/",
-                                    [
-                                        {
-                                            "Ref": "ResolverBucket"
-                                        },
-                                        {
-                                            "Ref": "ResolverRootKey"
-                                        },
-                                        {
-                                            "Fn::Join": [
-                                                ".",
-                                                [
-                                                    "Plant",
-                                                    "synonyms",
                                                     "response",
                                                     {
                                                         "Ref": "DeploymentTimestamp"
@@ -3492,6 +2779,182 @@
                                                 [
                                                     "Plant",
                                                     "extraInformation",
+                                                    "response",
+                                                    {
+                                                        "Ref": "DeploymentTimestamp"
+                                                    }
+                                                ]
+                                            ]
+                                        }
+                                    ]
+                                ]
+                            }
+                        ]
+                    ]
+                }
+            },
+            "DependsOn": "GraphQLSchema"
+        },
+        "PlantNamesplantResolver": {
+            "Type": "AWS::AppSync::Resolver",
+            "Properties": {
+                "ApiId": {
+                    "Fn::GetAtt": [
+                        "GraphQLAPI",
+                        "ApiId"
+                    ]
+                },
+                "DataSourceName": {
+                    "Fn::GetAtt": [
+                        "PlantDataSource",
+                        "Name"
+                    ]
+                },
+                "FieldName": "plant",
+                "TypeName": "PlantNames",
+                "RequestMappingTemplateS3Location": {
+                    "Fn::Join": [
+                        "",
+                        [
+                            "s3://",
+                            {
+                                "Fn::Join": [
+                                    "/",
+                                    [
+                                        {
+                                            "Ref": "ResolverBucket"
+                                        },
+                                        {
+                                            "Ref": "ResolverRootKey"
+                                        },
+                                        {
+                                            "Fn::Join": [
+                                                ".",
+                                                [
+                                                    "PlantNames",
+                                                    "plant",
+                                                    "request",
+                                                    {
+                                                        "Ref": "DeploymentTimestamp"
+                                                    }
+                                                ]
+                                            ]
+                                        }
+                                    ]
+                                ]
+                            }
+                        ]
+                    ]
+                },
+                "ResponseMappingTemplateS3Location": {
+                    "Fn::Join": [
+                        "",
+                        [
+                            "s3://",
+                            {
+                                "Fn::Join": [
+                                    "/",
+                                    [
+                                        {
+                                            "Ref": "ResolverBucket"
+                                        },
+                                        {
+                                            "Ref": "ResolverRootKey"
+                                        },
+                                        {
+                                            "Fn::Join": [
+                                                ".",
+                                                [
+                                                    "PlantNames",
+                                                    "plant",
+                                                    "response",
+                                                    {
+                                                        "Ref": "DeploymentTimestamp"
+                                                    }
+                                                ]
+                                            ]
+                                        }
+                                    ]
+                                ]
+                            }
+                        ]
+                    ]
+                }
+            },
+            "DependsOn": "GraphQLSchema"
+        },
+        "PlantExtraInformationplantResolver": {
+            "Type": "AWS::AppSync::Resolver",
+            "Properties": {
+                "ApiId": {
+                    "Fn::GetAtt": [
+                        "GraphQLAPI",
+                        "ApiId"
+                    ]
+                },
+                "DataSourceName": {
+                    "Fn::GetAtt": [
+                        "PlantDataSource",
+                        "Name"
+                    ]
+                },
+                "FieldName": "plant",
+                "TypeName": "PlantExtraInformation",
+                "RequestMappingTemplateS3Location": {
+                    "Fn::Join": [
+                        "",
+                        [
+                            "s3://",
+                            {
+                                "Fn::Join": [
+                                    "/",
+                                    [
+                                        {
+                                            "Ref": "ResolverBucket"
+                                        },
+                                        {
+                                            "Ref": "ResolverRootKey"
+                                        },
+                                        {
+                                            "Fn::Join": [
+                                                ".",
+                                                [
+                                                    "PlantExtraInformation",
+                                                    "plant",
+                                                    "request",
+                                                    {
+                                                        "Ref": "DeploymentTimestamp"
+                                                    }
+                                                ]
+                                            ]
+                                        }
+                                    ]
+                                ]
+                            }
+                        ]
+                    ]
+                },
+                "ResponseMappingTemplateS3Location": {
+                    "Fn::Join": [
+                        "",
+                        [
+                            "s3://",
+                            {
+                                "Fn::Join": [
+                                    "/",
+                                    [
+                                        {
+                                            "Ref": "ResolverBucket"
+                                        },
+                                        {
+                                            "Ref": "ResolverRootKey"
+                                        },
+                                        {
+                                            "Fn::Join": [
+                                                ".",
+                                                [
+                                                    "PlantExtraInformation",
+                                                    "plant",
                                                     "response",
                                                     {
                                                         "Ref": "DeploymentTimestamp"
@@ -4000,14 +3463,14 @@
             },
             "DependsOn": "ElasticSearchDataSource"
         },
-        "PlantCommonNamesLambdaMapping": {
+        "PlantNamesLambdaMapping": {
             "Type": "AWS::Lambda::EventSourceMapping",
             "Properties": {
                 "BatchSize": 1,
                 "Enabled": true,
                 "EventSourceArn": {
                     "Fn::GetAtt": [
-                        "PlantCommonNamesTable",
+                        "PlantNamesTable",
                         "StreamArn"
                     ]
                 },
@@ -4021,7 +3484,7 @@
             },
             "DependsOn": "ElasticSearchStreamingLambdaFunction"
         },
-        "SearchPlantCommonNamesResolver": {
+        "SearchPlantNamesResolver": {
             "Type": "AWS::AppSync::Resolver",
             "Properties": {
                 "ApiId": {
@@ -4036,7 +3499,7 @@
                         "Name"
                     ]
                 },
-                "FieldName": "searchPlantCommonNamess",
+                "FieldName": "searchPlantNamess",
                 "TypeName": "Query",
                 "RequestMappingTemplate": {
                     "Fn::Sub": [
@@ -4046,70 +3509,7 @@
                                 "Fn::Join": [
                                     "-",
                                     [
-                                        "PlantCommonNames",
-                                        {
-                                            "Fn::GetAtt": [
-                                                "GraphQLAPI",
-                                                "ApiId"
-                                            ]
-                                        }
-                                    ]
-                                ]
-                            }
-                        }
-                    ]
-                },
-                "ResponseMappingTemplate": "#set( $items = [] )\n#foreach( $entry in $context.result.hits.hits )\n  #if( !$foreach.hasNext )\n    #set( $nextToken = \"$entry.sort.get(0)\" )\n  #end\n$util.qr($items.add($entry.get(\"_source\")))\n#end\n$util.toJson({\n  \"items\": $items,\n  \"total\": $ctx.result.hits.total,\n  \"nextToken\": $nextToken\n})"
-            },
-            "DependsOn": "ElasticSearchDataSource"
-        },
-        "PlantSynonymsLambdaMapping": {
-            "Type": "AWS::Lambda::EventSourceMapping",
-            "Properties": {
-                "BatchSize": 1,
-                "Enabled": true,
-                "EventSourceArn": {
-                    "Fn::GetAtt": [
-                        "PlantSynonymsTable",
-                        "StreamArn"
-                    ]
-                },
-                "FunctionName": {
-                    "Fn::GetAtt": [
-                        "ElasticSearchStreamingLambdaFunction",
-                        "Arn"
-                    ]
-                },
-                "StartingPosition": "LATEST"
-            },
-            "DependsOn": "ElasticSearchStreamingLambdaFunction"
-        },
-        "SearchPlantSynonymsResolver": {
-            "Type": "AWS::AppSync::Resolver",
-            "Properties": {
-                "ApiId": {
-                    "Fn::GetAtt": [
-                        "GraphQLAPI",
-                        "ApiId"
-                    ]
-                },
-                "DataSourceName": {
-                    "Fn::GetAtt": [
-                        "ElasticSearchDataSource",
-                        "Name"
-                    ]
-                },
-                "FieldName": "searchPlantSynonymss",
-                "TypeName": "Query",
-                "RequestMappingTemplate": {
-                    "Fn::Sub": [
-                        "#set( $indexPath = \"/${DDBTableName}/doc/_search\" )\n{\n  \"version\": \"2017-02-28\",\n  \"operation\": \"GET\",\n  \"path\": \"$indexPath.toLowerCase()\",\n  \"params\": {\n      \"body\": {\n          \"from\":       #if( $context.args.nextToken )\n        $context.args.nextToken\n      #else\n        0\n      #end,\n          \"size\":       #if( $context.args.limit )\n        $context.args.limit\n      #else\n        10\n      #end,\n          \"sort\":       #if( $context.args.sort )\n        [#if( !$util.isNullOrEmpty($context.args.sort.field) && !$util.isNullOrEmpty($context.args.sort.direction) )\n{\n      \"$context.args.sort.field\": {\n          \"order\": \"$context.args.sort.direction\"\n    }\n  }\n#end, \"_doc\"]\n      #else\n        []\n      #end,\n          \"query\":       #if( $context.args.filter )\n        $util.transform.toElasticsearchQueryDSL($ctx.args.filter)\n      #else\n        {\n  \"match_all\": {}\n}\n      #end\n    }\n  }\n}",
-                        {
-                            "DDBTableName": {
-                                "Fn::Join": [
-                                    "-",
-                                    [
-                                        "PlantSynonyms",
+                                        "PlantNames",
                                         {
                                             "Fn::GetAtt": [
                                                 "GraphQLAPI",

@@ -1,20 +1,14 @@
 {
 	"providers": {
 		"awscloudformation": {
-			"AuthRoleName": "lanted-20181001212359-authRole",
-			"UnauthRoleArn": "arn:aws:iam::351823263517:role/lanted-20181001212359-unauthRole",
-			"AuthRoleArn": "arn:aws:iam::351823263517:role/lanted-20181001212359-authRole",
+			"AuthRoleName": "lanted-20181009215948-authRole",
+			"UnauthRoleArn": "arn:aws:iam::351823263517:role/lanted-20181009215948-unauthRole",
+			"AuthRoleArn": "arn:aws:iam::351823263517:role/lanted-20181009215948-authRole",
 			"Region": "eu-west-1",
-			"DeploymentBucketName": "lanted-20181001212359-deployment",
-			"UnauthRoleName": "lanted-20181001212359-unauthRole",
-			"StackName": "lanted-20181001212359",
-			"StackId": "arn:aws:cloudformation:eu-west-1:351823263517:stack/lanted-20181001212359/ec8a1700-c5b7-11e8-a12d-500c3cd570d2"
-		}
-	},
-	"auth": {
-		"cognitoab092b19": {
-			"service": "Cognito",
-			"providerPlugin": "awscloudformation"
+			"DeploymentBucketName": "lanted-20181009215948-deployment",
+			"UnauthRoleName": "lanted-20181009215948-unauthRole",
+			"StackName": "lanted-20181009215948",
+			"StackId": "arn:aws:cloudformation:eu-west-1:351823263517:stack/lanted-20181009215948/414cc360-cc06-11e8-9700-50a686340229"
 		}
 	},
 	"api": {
@@ -23,16 +17,37 @@
 			"providerPlugin": "awscloudformation",
 			"output": {
 				"securityType": "API_KEY",
-				"GraphQLAPIIdOutput": "ehvuy77fd5c6fh3rs57k2tbsjm",
-				"GraphQLAPIEndpointOutput": "https://5wbptssaafe3riny5ojish5lq4.appsync-api.eu-west-1.amazonaws.com/graphql",
-				"GraphQLAPIKeyOutput": "da2-pbvhqzwmrfe6lhn5g4rqciolda"
+				"GraphQLAPIIdOutput": "a2cqee6zq5gona2qqtqrt6dmku",
+				"GraphQLAPIEndpointOutput": "https://x57v4dsu5fgplmw553iocewdtu.appsync-api.eu-west-1.amazonaws.com/graphql",
+				"GraphQLAPIKeyOutput": "da2-sroqbl3sg5c67mipv43rn5fevi"
 			},
 			"providerMetadata": {
-				"s3TemplateURL": "https://s3.amazonaws.com/lanted-20181001212359-deployment/amplify-cfn-templates/api/cloudformation-template.json",
+				"s3TemplateURL": "https://s3.amazonaws.com/lanted-20181009215948-deployment/amplify-cfn-templates/api/cloudformation-template.json",
 				"logicalId": "apiplanted"
 			},
-			"lastPushTimeStamp": "2018-10-03T19:53:05.211Z",
-			"lastPushDirHash": "7u83NsSxx//6PK1N4+gOAfwEtR0="
+			"lastPushTimeStamp": "2018-10-28T20:41:34.825Z",
+			"lastPushDirHash": "xYUBtHjl/nsbSuLSFc+qJBzqzdI="
+		}
+	},
+	"auth": {
+		"cognito051a4508": {
+			"service": "Cognito",
+			"providerPlugin": "awscloudformation",
+			"providerMetadata": {
+				"s3TemplateURL": "https://s3.amazonaws.com/lanted-20181009215948-deployment/amplify-cfn-templates/auth/cognito051a4508-cloudformation-template.yml",
+				"logicalId": "authcognito051a4508"
+			},
+			"lastPushTimeStamp": "2018-10-28T20:41:32.921Z",
+			"output": {
+				"AppClientSecret": "eu5jamce6j2krrbi7uj4kelhq88g54kjpl4grhi1tkjkvr3g20r",
+				"UserPoolId": "eu-west-1_EIOUiOfVx",
+				"AppClientIDWeb": "61c0sn8ep4jj6rgu9u934ofab",
+				"AppClientID": "773u7u8q445rcor0a969q97hol",
+				"IdentityPoolId": "eu-west-1:e063563b-6e53-443f-af70-958ce3ef2e50",
+				"IdentityPoolName": "cognito051a4508_identitypool_051a4508",
+				"UserPoolName": "cognito051a4508_userpool_051a4508"
+			},
+			"lastPushDirHash": "OVm7wQzFgtN5QC8lMGoD5RJRxGs="
 		}
 	}
 }

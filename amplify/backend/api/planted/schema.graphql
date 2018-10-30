@@ -7,27 +7,26 @@ type Plant @model @searchable {
   id: ID!
   latinName: String!
   genus: String!
-  commonNames: [PlantCommonNames] @connection(name: "CommonNames")
-  synonyms: [PlantSynonyms] @connection(name: "Synonyms")
+  commonNames: [PlantNames] @connection(name: "Names")
   extraInformation: [PlantExtraInformation] @connection(name: "ExtraInformation")
 }
 
-type PlantCommonNames @model @searchable {
+type PlantNames @model @searchable {
   id: ID!
-  commonName: String!
-  plant: Plant @connection(name: "CommonNames")
+  name: String!
+  nameType: PlantName!
+  plant: Plant @connection(name: "Names")
 }
 
-type PlantSynonyms @model @searchable {
-  id: ID!
-  synonym: String!
-  plant: Plant @connection(name: "Synonyms")
+enum PlantName {
+  LatinName
+  CommonName
+  Synonym
 }
 
 type PlantExtraInformation @model {
   id: ID!
-  information: String!
+  key: String!
+  value: String!
   plant: Plant @connection(name: "ExtraInformation")
 }
-
-

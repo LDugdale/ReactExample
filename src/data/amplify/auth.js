@@ -1,8 +1,9 @@
-import { Auth } from 'aws-amplify';
+import { Auth } from './amplify';
 
 // Sign Up
-export const doCreateUserWithEmailAndPassword = (email, password) =>
+export const doCreateUserWithEmailAndPassword = (username, email, password) =>
     Auth.signUp({ username, password, attributes: {email}})
+
 
 // Sign In
 export const doSignInWithEmailAndPassword = (username, password) =>
@@ -15,3 +16,6 @@ export const doSignOut = () =>
 // Password Reset
 export const doPasswordReset = (username) =>
     Auth.forgotPassword(username)
+
+export const getCurrentAuthenticatedUser = () =>
+    Auth.currentAuthenticatedUser()

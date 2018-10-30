@@ -38,8 +38,10 @@ class SignUpContainer extends Component {
         createUser(username, email, passwordOne)
         .then(() => {
           this.setState(() => ({ ...INITIAL_STATE }));
-          this.props.history.push(routes.HOME);
           spinnerController.hide();
+          debugger;
+          this.props.history.push(routes.HOME);
+
         })
         .catch(error => {
           this.setState(updateByPropertyName('error', error));

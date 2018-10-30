@@ -1,4 +1,5 @@
 import React from 'react';
+import PickerHeader from './pickerHeader';
 
 const PickerPopup = (props) => {
 
@@ -9,10 +10,12 @@ const PickerPopup = (props) => {
     return(
         <div className='popup-wrapper'>
             <div className='popup-header'>
-                <input />
+                <PickerHeader
+                    inputHandler={props.inputHandler}
+                />
             </div>
             <div className='popup-content'>
-                <h1>WTF</h1>
+                {props.pickerItems()}
             </div>
         </div>
     );

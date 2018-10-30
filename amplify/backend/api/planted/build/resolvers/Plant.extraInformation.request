@@ -5,7 +5,7 @@
   "query": {
       "expression": "#connectionAttribute = :connectionAttribute",
       "expressionNames": {
-          "#connectionAttribute": "plantExtraInformationId"
+          "#connectionAttribute": "plantExtraInformationPlantId"
     },
       "expressionValues": {
           ":connectionAttribute": {
@@ -33,5 +33,5 @@
   #else
     null
   #end,
-  "index": "gsi-Plant.extraInformation"
+  "index": "gsi-ExtraInformation"
 }

@@ -1,21 +1,21 @@
-import { auth, db } from '../firebase';
+import { auth, dbCreate } from '../data/amplify';
  
 
 export const createUser = (username, email, passwordOne) => {
     return new Promise((resolve, reject) => {
-        auth.doCreateUserWithEmailAndPassword(email, passwordOne)
+        auth.doCreateUserWithEmailAndPassword(username, email, passwordOne)
         .then(authUser => {
-            db.doCreateUser(authUser.user.uid, username, email)
+            dbCreate.createUser({username: username})
             .then(() =>
                 resolve()
             )
-            .catch(error =>
+            .catch((error) =>
                 reject(error)
-            );    
+            );               
         })
-        .catch(error =>
-            reject(error)
-        );
+        .catch(error => {
+            reject(error);
+        });
     });
 }
 
