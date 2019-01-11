@@ -1,16 +1,17 @@
-import { dbRead } from '../data/amplify';
+import { plant } from '../data/server';
 
-const searchPlantNames = (inputText) => {
-    const filter = {
-        filter: {
-            name: { 
-                matchPhrasePrefix: inputText
-            }
-        }
-    }
-    return dbRead.searchPlantNames(filter);
+export const searchPlants = (searchText) => {
+    let data = {
+        searchText: searchText
+    };
+    
+    return new Promise((resolve, reject) => {
+        plant.searchPlants(data)    
+        .then((data) => {
+            resolve(data)
+        })
+        .catch((error) => {
+            reject(error)
+        });
+    });
 }
-
-export {
-    searchPlantNames,
-};

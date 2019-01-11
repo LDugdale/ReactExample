@@ -8,7 +8,10 @@ const SignUpForm = (props) =>{
         email,
         passwordOne,
         passwordTwo,
-        error,
+        usernameError,
+        emailError,
+        passwordError,
+        authenticationError
       } = props.values;
   
       return (
@@ -20,6 +23,7 @@ const SignUpForm = (props) =>{
                 type="text"
                 placeholder="Username"
             />
+            <p className='form-error'>{usernameError}</p>
           <Input
                 value={email}
                 onChange={props.onChange}
@@ -27,6 +31,7 @@ const SignUpForm = (props) =>{
                 type="text"
                 placeholder="Email"
             />
+            <p className='form-error'>{emailError}</p>
           <Input
                 value={passwordOne}
                 onChange={props.onChange}
@@ -34,6 +39,7 @@ const SignUpForm = (props) =>{
                 type="password"
                 placeholder="Password"
             />
+            <p className='form-error'>{passwordError}</p>
           <Input
                 value={passwordTwo}
                 onChange={props.onChange}
@@ -41,11 +47,11 @@ const SignUpForm = (props) =>{
                 type="password"
                 placeholder="Confirm Password"
             />
-          <button disabled={props.isInvalid()} type="submit">
+          <button type="submit">
             Sign Up
           </button>
   
-          { error && <p>{error.message}</p> }
+          <p className='form-error'>{authenticationError}</p>
         </form>
       );
 }

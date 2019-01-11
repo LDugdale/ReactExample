@@ -11,7 +11,7 @@ const PickerItem = (props) => {
             <div className='plant'>
                 <div className='plant-image'></div>
                 <h4 className='plant-name'>{plant.latinName}</h4>
-                <h5 className='plant-genus'>{plant.genus}</h5>            
+                <h6 className='plant-genus'>{plant.genus}</h6>            
             </div>
         </div>
     );

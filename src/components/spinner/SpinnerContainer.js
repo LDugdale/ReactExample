@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import Icon, { icons } from '../../icons';
-import '../../styles/spinner.css'
+import Icon, { icons } from '../../assets/icons';
+import '../../assets/styles/spinner.css'
 
 const INITIAL_STATE = {
     show: false

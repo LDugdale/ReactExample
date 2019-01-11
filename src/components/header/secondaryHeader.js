@@ -1,11 +1,15 @@
 import React from 'react';
-import Icon, { icons } from '../../icons';
+import Icon, { icons } from '../../assets/icons';
 
-const SecondaryHeader = () => {
+const SecondaryHeader = (props) => {
 
     return(
         <div className='secondary-header'>
-            <Icon icon={icons.BACK} iconClassName='action back' />
+            <Icon 
+                icon={icons.BACK} 
+                iconClassName='action back' 
+                onClick={props.onClick}
+            />
         </div>
     );
 }

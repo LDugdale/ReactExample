@@ -1,11 +1,11 @@
 import React from 'react';
-import Icon, { icons } from '../../icons';
+import MenuButton from '../controls/menuButton';
+import Icon, { icons } from '../../assets/icons';
 
-const PrimaryHeader = () => {
-
+const PrimaryHeader = (props) => {
     return(
         <div className='primary-header'>
-            <Icon icon={icons.HAMBURGER} iconClassName='action hamburger' />
+            <MenuButton open={props.menuOpen} onClick={props.handleMenuClick}/>
         </div>
     );
 }

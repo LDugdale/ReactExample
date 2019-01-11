@@ -6,7 +6,9 @@ const SignInForm = (props) => {
     const {
     email,
     password,
-    error,
+    emailError,
+    passwordError,
+    authenticationError,
     } = props.values;
     
     return (
@@ -18,6 +20,7 @@ const SignInForm = (props) => {
                 type="text"
                 placeholder="Email"
             />
+            <p className='form-error'>{emailError}</p>
             <Input
                 value={password}
                 onChange={props.onChange}
@@ -25,11 +28,11 @@ const SignInForm = (props) => {
                 type="password"
                 placeholder="Password"
             />
-            <button disabled={props.isInvalid()} type="submit">
+            <p className='form-error'>{passwordError}</p>
+            <button type="submit">
                 LOG IN
             </button>
-
-            { error && <p>{error.message}</p> }
+            <p className='form-error'>{authenticationError}</p>
         </form>
     );
 }

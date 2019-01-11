@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Tabs from './tabs';
 import Tab from './tab';
 import Menu from './menu';
-import '../../styles/footer.css';
+import '../../assets/styles/footer.css';
 
 const transitionTime = 200;
 const transitionStyle = `left ${transitionTime}ms, right ${transitionTime}ms`;

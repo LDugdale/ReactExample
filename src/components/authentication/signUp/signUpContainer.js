@@ -5,6 +5,7 @@ import SignUpForm from './signUpForm';
 import * as routes from '../../../constants/routes';
 import { SignInLink } from '../signIn'
 import { Spinner, spinnerController } from '../../spinner';
+import { validateSignUpFields } from '../../../services/formService';
 
 const updateByPropertyName = (propertyName, value) => () => ({
   [propertyName]: value,
@@ -15,7 +16,10 @@ const INITIAL_STATE = {
   email: '',
   passwordOne: '',
   passwordTwo: '',
-  error: null,
+  usernameError: '',
+  emailError: '',
+  passwordError: '',
+  authenticationError: ''
 };
 
 class SignUpContainer extends Component {
@@ -24,38 +28,41 @@ class SignUpContainer extends Component {
     this.state = { ...INITIAL_STATE };
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
-    this.isInvalid = this.isInvalid.bind(this);
   }
 
     handleSubmit(event) {
+      event.preventDefault();
+      spinnerController.show();
 
-        const {
-            username,
-            email,
-            passwordOne,
-        } = this.state;
-        spinnerController.show();
-        createUser(username, email, passwordOne)
-        .then(() => {
-          this.setState(() => ({ ...INITIAL_STATE }));
-          spinnerController.hide();
-          debugger;
-          this.props.history.push(routes.HOME);
+      const {
+        username,
+        email,
+        passwordOne,
+        passwordTwo
+      } = this.state;
 
-        })
-        .catch(error => {
-          this.setState(updateByPropertyName('error', error));
-          spinnerController.hide();
-        });
-        event.preventDefault();
+        validateSignUpFields(username, email, passwordOne, passwordTwo)
+          .then(() => {
+
+              createUser(username, email, passwordOne)
+              .then(() => {
+                this.setState(() => ({ ...INITIAL_STATE }));
+                spinnerController.hide();
+                this.props.history.push(routes.HOME);
+              })
+              .catch(authenticationError => {
+                this.setState(updateByPropertyName('authenticationError', authenticationError.error));
+                spinnerController.hide();
+              });
+          })
+          .catch((errors) => {
+            this.setState({...errors});
+            spinnerController.hide();
+          });
     }
 
   handleChange(key, value){
     this.setState(updateByPropertyName(key, value));
-  }
-
-  isInvalid(){
-    return this.state.passwordOne !== this.state.passwordTwo || this.state.passwordOne === '' || this.state.username === '' || this.state.email === '';
   }
 
   render(){

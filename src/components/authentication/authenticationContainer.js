@@ -1,6 +1,6 @@
 import React from 'react';
 import { appRoutes } from '../../routing';
-import '../../styles/authentication.css';
+import '../../assets/styles/authentication.css';
 
 const AuthenticationContainer = () => {
 

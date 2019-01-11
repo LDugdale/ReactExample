@@ -1,5 +1,5 @@
 import React from 'react';
-import Icon, {icons} from '../../icons';
+import Icon, {icons} from '../../assets/icons';
 
 const Menu = (props) => {
     if(!props.showMenu){

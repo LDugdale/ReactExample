@@ -1,19 +1,15 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom';
-
+import { isSignedIn } from '../services/userService';
 import AuthUserContext from './authUserContext';
-import { auth } from '../data/amplify';
 import * as routes from '../constants/routes';
 
 const withAuthorization = (condition) => (Component) => {
   class WithAuthorization extends React.Component {
-
     componentDidMount() {
-
-      auth.getCurrentAuthenticatedUser()
-        .catch(() => {
+        if (!isSignedIn()) {
           this.props.history.push(routes.SIGN_IN);
-        })
+        }
     }
 
     render() {

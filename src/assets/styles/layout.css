@@ -1,0 +1,15 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
+
+.container .content {
+    flex: 1 100%;
+    overflow: scroll;
+}
+
+.container .footer{
+    height: 47px;
+    z-index: 100;
+}

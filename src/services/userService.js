@@ -1,28 +1,56 @@
-import { auth, dbCreate } from '../data/amplify';
+import { user } from '../data/server';
+import { setToken, getToken, isTokenExpired, getTokenInfo } from  './tokenService';
  
-
 export const createUser = (username, email, passwordOne) => {
+
+    const credentials = {
+        username: username,
+        email: email,
+        password: passwordOne
+    }
+
     return new Promise((resolve, reject) => {
-        auth.doCreateUserWithEmailAndPassword(username, email, passwordOne)
-        .then(authUser => {
-            dbCreate.createUser({username: username})
-            .then(() =>
-                resolve()
-            )
-            .catch((error) =>
-                reject(error)
-            );               
+        user.createUser(credentials)
+        .then((data) => {
+            setToken(data.token);
+            resolve()
         })
-        .catch(error => {
-            reject(error);
+        .catch((error) => {
+            reject(error)
         });
     });
 }
 
-export const signIn = (email, password) => {
-    return auth.doSignInWithEmailAndPassword(email, password);
+export const signInUser = (email, password) => {
+
+    let credentials = {
+        email: email,
+        password: password
+    }
+
+    return new Promise((resolve, reject) => {
+        user.signInUser(credentials)
+        .then((data) => {
+            setToken(data.token);
+            resolve()
+        })
+        .catch((error) => {
+            reject(error)
+        });
+    });
+    
+}
+
+export const isSignedIn = () => {
+    const token = getToken() 
+    return token && !isTokenExpired(token)
 }
 
 export const passwordReset = (email) => {
-    return auth.doPasswordReset(email);
+    //return auth.doPasswordReset(email);
+}
+
+export const getProfile = () => {
+    const tokenInfo = getTokenInfo();
+    return tokenInfo;
 }

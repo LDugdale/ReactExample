@@ -1,7 +1,6 @@
 import React from 'react';
-
 import AuthUserContext from './authUserContext';
-import { auth } from '../data/amplify';
+import { isSignedIn, getProfile } from '../services/userService';
 
 const withAuthentication = (Component) =>
   class WithAuthentication extends React.Component {
@@ -14,13 +13,9 @@ const withAuthentication = (Component) =>
     }
 
     componentDidMount() {
-      auth.getCurrentAuthenticatedUser()
-          .then(authUser => {
-            this.setState(() => ({ authUser })); 
-          })
-          .catch(err => {
-            this.setState(() => ({ authUser: null }))
-          });
+      isSignedIn()
+          ? this.setState(() => ({ authUser: getProfile() }))
+          : this.setState(() => ({ authUser: null }));
     }
 
     render() {
